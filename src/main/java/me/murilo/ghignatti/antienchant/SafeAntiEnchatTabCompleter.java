@@ -44,14 +44,12 @@ public class SafeAntiEnchatTabCompleter implements TabCompleter {
             StringUtil.copyPartialMatches(args[0], commands, completions);
         } else if (args.length == 2) {
             if (args[0].equals("add")) {
-                commands.add("hand");
                 commands.addAll(materials.stream().filter(it -> it.toLowerCase().startsWith(args[1].toLowerCase())).collect(Collectors.toList()));
             } else if (args[0].equals("remove")) {
-                commands.add("hand");
                 commands.addAll(blockedMaterialsHandler.getBlockedMaterials());
             }
             StringUtil.copyPartialMatches(args[1], commands, completions);
-        } else if (args.length >= 3 && !args[1].equals("hand")) {
+        } else if (args.length >= 3) {
             Set<String> alreadyAddedItems = new HashSet<>(Arrays.stream(args).map(String::toLowerCase).collect(Collectors.toList()).subList(1, args.length));
             if (args[0].equals("add")){
                 alreadyAddedItems.addAll(blockedMaterialsHandler.getBlockedMaterials().stream().map(String::toLowerCase).collect(Collectors.toList()));

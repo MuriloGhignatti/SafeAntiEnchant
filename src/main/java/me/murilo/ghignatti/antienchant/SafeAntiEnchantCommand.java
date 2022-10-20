@@ -31,30 +31,30 @@ public class SafeAntiEnchantCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         switch (args[0].toLowerCase()) {
             case "add":
-                if (!sender.hasPermission(Constants.ADD_PERMISSION)){
+                if (!sender.hasPermission(Constants.ADD_PERMISSION)) {
                     return false;
                 }
-                if (args[1].equalsIgnoreCase("hand"))
+                if (args.length == 1) {
                     return addHandItem((Player) sender);
-                else {
+                } else {
                     return addItem(Arrays.stream(args).skip(1).collect(Collectors.toList()), sender);
                 }
             case "remove":
-                if (!sender.hasPermission(Constants.REMOVE_PERMISSION)){
+                if (!sender.hasPermission(Constants.REMOVE_PERMISSION)) {
                     return false;
                 }
-                if (args[1].equalsIgnoreCase("hand"))
+                if (args.length == 1) {
                     return removeHandItem((Player) sender);
-                else {
+                } else {
                     return removeItem(Arrays.stream(args).skip(1).collect(Collectors.toList()), sender);
                 }
             case "list":
-                if (!sender.hasPermission(Constants.LIST_PERMISSION)){
+                if (!sender.hasPermission(Constants.LIST_PERMISSION)) {
                     return false;
                 }
                 return listBlockedItems(sender);
             case "reload":
-                if (!sender.hasPermission(Constants.RELOAD_PERMISSION)){
+                if (!sender.hasPermission(Constants.RELOAD_PERMISSION)) {
                     return false;
                 }
                 blockedMaterialsHandler.loadMaterials(mainInstance.getConfig());
@@ -75,7 +75,7 @@ public class SafeAntiEnchantCommand implements CommandExecutor {
         return addItem(Collections.singletonList(p.getInventory().getItemInMainHand().getType().name()), p);
     }
 
-    private boolean listBlockedItems(CommandSender sender){
+    private boolean listBlockedItems(CommandSender sender) {
         sender.sendMessage(Constants.PLUGIN_PREFIX + ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(config.getString(Constants.MESSAGE_LIST_BLOCKED_ITEMS))).replace("{items}", String.join(", ", blockedMaterialsHandler.getBlockedMaterials())));
         return true;
     }
