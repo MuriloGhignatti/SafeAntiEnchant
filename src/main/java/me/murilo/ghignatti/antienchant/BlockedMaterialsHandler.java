@@ -14,12 +14,12 @@ public class BlockedMaterialsHandler {
         loadMaterials(configuration);
     }
 
-    public void blockMaterial(Material item){
-        blockedMaterials.add(item);
+    public void blockMaterial(Material material){
+        blockedMaterials.add(material);
     }
 
-    public void unblockMaterial(Material item){
-        blockedMaterials.remove(item);
+    public void unblockMaterial(Material material){
+        blockedMaterials.remove(material);
     }
 
     public List<String> getBlockedMaterials(){

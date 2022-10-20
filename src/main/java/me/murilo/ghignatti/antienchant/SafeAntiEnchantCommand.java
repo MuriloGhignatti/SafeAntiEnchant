@@ -35,24 +35,24 @@ public class SafeAntiEnchantCommand implements CommandExecutor {
                     return false;
                 }
                 if (args.length == 1) {
-                    return addHandItem((Player) sender);
+                    return addHandMaterial((Player) sender);
                 } else {
-                    return addItem(Arrays.stream(args).skip(1).collect(Collectors.toList()), sender);
+                    return addMaterial(Arrays.stream(args).skip(1).collect(Collectors.toList()), sender);
                 }
             case "remove":
                 if (!sender.hasPermission(Constants.REMOVE_PERMISSION)) {
                     return false;
                 }
                 if (args.length == 1) {
-                    return removeHandItem((Player) sender);
+                    return removeHandMaterial((Player) sender);
                 } else {
-                    return removeItem(Arrays.stream(args).skip(1).collect(Collectors.toList()), sender);
+                    return removeMaterial(Arrays.stream(args).skip(1).collect(Collectors.toList()), sender);
                 }
             case "list":
                 if (!sender.hasPermission(Constants.LIST_PERMISSION)) {
                     return false;
                 }
-                return listBlockedItems(sender);
+                return listBlockedMaterial(sender);
             case "reload":
                 if (!sender.hasPermission(Constants.RELOAD_PERMISSION)) {
                     return false;
@@ -67,20 +67,20 @@ public class SafeAntiEnchantCommand implements CommandExecutor {
         }
     }
 
-    private boolean removeHandItem(Player p) {
-        return removeItem(Collections.singletonList(p.getInventory().getItemInMainHand().getType().name()), p);
+    private boolean removeHandMaterial(Player p) {
+        return removeMaterial(Collections.singletonList(p.getInventory().getItemInMainHand().getType().name()), p);
     }
 
-    private boolean addHandItem(Player p) {
-        return addItem(Collections.singletonList(p.getInventory().getItemInMainHand().getType().name()), p);
+    private boolean addHandMaterial(Player p) {
+        return addMaterial(Collections.singletonList(p.getInventory().getItemInMainHand().getType().name()), p);
     }
 
-    private boolean listBlockedItems(CommandSender sender) {
+    private boolean listBlockedMaterial(CommandSender sender) {
         sender.sendMessage(Constants.PLUGIN_PREFIX + ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(config.getString(Constants.MESSAGE_LIST_BLOCKED_ITEMS))).replace("{items}", String.join(", ", blockedMaterialsHandler.getBlockedMaterials())));
         return true;
     }
 
-    private boolean addItem(List<String> args, CommandSender sender) {
+    private boolean addMaterial(List<String> args, CommandSender sender) {
         if (args.isEmpty()) {
             return false;
         }
@@ -90,7 +90,7 @@ public class SafeAntiEnchantCommand implements CommandExecutor {
         return true;
     }
 
-    private boolean removeItem(List<String> args, CommandSender sender) {
+    private boolean removeMaterial(List<String> args, CommandSender sender) {
         if (args.isEmpty()) {
             return false;
         }
