@@ -1,0 +1,13 @@
+name: SafeAntiEnchant
+version: '${project.version}'
+main: me.murilo.ghignatti.antienchant.SafeAntiEnchant
+api-version: 1.19
+authors: [ MuriloHenriqueGhignatti ]
+description: A plugin to block specific items from being enchanted
+website: https://github.com/MuriloGhignatti
+commands:
+  SafeAntiEnchant:
+    aliases:
+      - sae
+      - antienchat
+    description: Command to add or remove items as well as reload the configuration
