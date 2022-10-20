@@ -1,6 +1,6 @@
 # Safe Anti Enchant
 
-A plugin that allows you to block items to be enchanted
+A plugin that allows you to block items from being enchanted
 
 ## Commands
 Usage ```/safeantienchant [add|remove|reload|list]```
