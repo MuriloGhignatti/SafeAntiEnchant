@@ -84,7 +84,7 @@ public class SafeAntiEnchantCommand implements CommandExecutor {
         if (args.isEmpty()) {
             return false;
         }
-        args.stream().map(Material::getMaterial).forEach(blockedMaterialsHandler::blockItem);
+        args.stream().map(Material::getMaterial).forEach(blockedMaterialsHandler::blockMaterial);
         mainInstance.forceSaveConfig();
         sender.sendMessage(Constants.PLUGIN_PREFIX + ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(config.getString(Constants.MESSAGE_ADDING_ITEM_PATH))).replace("{item}", String.join(", ", args)));
         return true;
@@ -94,7 +94,7 @@ public class SafeAntiEnchantCommand implements CommandExecutor {
         if (args.isEmpty()) {
             return false;
         }
-        args.stream().map(Material::getMaterial).forEach(blockedMaterialsHandler::unblockItem);
+        args.stream().map(Material::getMaterial).forEach(blockedMaterialsHandler::unblockMaterial);
         mainInstance.forceSaveConfig();
         sender.sendMessage(Constants.PLUGIN_PREFIX + ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(config.getString(Constants.MESSAGE_REMOVING_ITEM_PATH))).replace("{item}", String.join(", ", args)));
         return true;

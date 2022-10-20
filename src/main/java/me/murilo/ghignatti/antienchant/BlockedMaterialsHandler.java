@@ -14,11 +14,11 @@ public class BlockedMaterialsHandler {
         loadMaterials(configuration);
     }
 
-    public void blockItem(Material item){
+    public void blockMaterial(Material item){
         blockedMaterials.add(item);
     }
 
-    public void unblockItem(Material item){
+    public void unblockMaterial(Material item){
         blockedMaterials.remove(item);
     }
 
@@ -35,6 +35,6 @@ public class BlockedMaterialsHandler {
     }
 
     public void loadMaterials(FileConfiguration config){
-        blockedMaterials = config.getStringList("Block.Items").stream().map(Material::getMaterial).collect(Collectors.toSet());
+        blockedMaterials = config.getStringList(Constants.BLOCKED_ITEMS_PATH).stream().map(Material::getMaterial).collect(Collectors.toSet());
     }
 }

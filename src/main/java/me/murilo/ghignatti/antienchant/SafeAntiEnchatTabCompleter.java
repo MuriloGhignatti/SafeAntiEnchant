@@ -26,19 +26,17 @@ public class SafeAntiEnchatTabCompleter implements TabCompleter {
         List<String> completions = new ArrayList<>();
         List<String> commands = new ArrayList<>();
 
-        Player p = (Player) sender;
-
         if (args.length == 1) {
-            if (p.hasPermission(Constants.ADD_PERMISSION)) {
+            if (sender.hasPermission(Constants.ADD_PERMISSION)) {
                 commands.add("add");
             }
-            if (p.hasPermission(Constants.REMOVE_PERMISSION)) {
+            if (sender.hasPermission(Constants.REMOVE_PERMISSION)) {
                 commands.add("remove");
             }
-            if (p.hasPermission(Constants.RELOAD_PERMISSION)) {
+            if (sender.hasPermission(Constants.RELOAD_PERMISSION)) {
                 commands.add("reload");
             }
-            if (p.hasPermission(Constants.LIST_PERMISSION)) {
+            if (sender.hasPermission(Constants.LIST_PERMISSION)) {
                 commands.add("list");
             }
             StringUtil.copyPartialMatches(args[0], commands, completions);
@@ -51,11 +49,10 @@ public class SafeAntiEnchatTabCompleter implements TabCompleter {
             StringUtil.copyPartialMatches(args[1], commands, completions);
         } else if (args.length >= 3) {
             Set<String> alreadyAddedItems = new HashSet<>(Arrays.stream(args).map(String::toLowerCase).collect(Collectors.toList()).subList(1, args.length));
-            if (args[0].equals("add")){
+            if (args[0].equals("add")) {
                 alreadyAddedItems.addAll(blockedMaterialsHandler.getBlockedMaterials().stream().map(String::toLowerCase).collect(Collectors.toList()));
                 commands.addAll(materials.stream().filter(it -> !alreadyAddedItems.contains(it)).collect(Collectors.toList()));
-            }
-            else if (args[0].equals("remove")){
+            } else if (args[0].equals("remove")) {
                 commands.addAll(blockedMaterialsHandler.getBlockedMaterials().stream().filter(it -> !alreadyAddedItems.contains(it.toLowerCase())).collect(Collectors.toList()));
             }
             StringUtil.copyPartialMatches(args[args.length - 1], commands, completions);
