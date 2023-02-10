@@ -1,6 +1,6 @@
 # Safe Anti Enchant
 
-A plugin that allows you to block items from being enchanted
+A Minecraft plugin that allows you to block items from being enchanted
 
 ## Commands
 Usage ```/safeantienchant [add|remove|reload|list]```
